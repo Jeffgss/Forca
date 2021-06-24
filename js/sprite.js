@@ -23,8 +23,12 @@ function createSprite(selector) {
     element.classList.add(to);
   }
 
+  function hasNext() {
+    return current + 1 <= lastFrame;
+  }
+
   function nextFrame() {
-    moveFrame(frames[current], frames[++current]);
+    if (hasNext()) moveFrame(frames[current], frames[++current]);
   }
 
   return {
