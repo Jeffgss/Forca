@@ -1,4 +1,4 @@
-function createSprite(selector) {
+const createSprite = function (selector) {
   let element = document.querySelector(".sprite");
 
   let frames = [
@@ -18,20 +18,25 @@ function createSprite(selector) {
 
   element.classList.add(frames[current]);
 
-  function moveFrame(from, to) {
+  const moveFrame = function (from, to) {
     element.classList.remove(from);
     element.classList.add(to);
-  }
+  };
 
-  function hasNext() {
+  const hasNext = function () {
     return current + 1 <= lastFrame;
-  }
+  };
 
-  function nextFrame() {
+  const nextFrame = function () {
     if (hasNext()) moveFrame(frames[current], frames[++current]);
-  }
+  };
+
+  const reset = function () {
+    element.classList.remove(frames[current]);
+  };
 
   return {
     nextFrame: nextFrame,
+    reset: reset,
   };
-}
+};
