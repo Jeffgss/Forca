@@ -32,7 +32,8 @@ const createSprite = function (selector) {
   };
 
   const reset = function () {
-    element.classList.remove(frames[current]);
+    moveFrame(frames[current], frames[0]);
+    current = 0;
   };
 
   const isFinished = function () {
