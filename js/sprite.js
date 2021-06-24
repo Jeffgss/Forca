@@ -35,8 +35,14 @@ const createSprite = function (selector) {
     element.classList.remove(frames[current]);
   };
 
+  const isFinished = function () {
+    if (hasNext()) return false;
+    return true;
+  };
+
   return {
     nextFrame: nextFrame,
     reset: reset,
+    isFinished: isFinished,
   };
 };
