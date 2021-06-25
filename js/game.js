@@ -51,6 +51,17 @@ const createGame = function (sprite) {
     return sprite.isFinished();
   };
 
+  const restart = function () {
+    secretWord = "";
+    gaps = [];
+    stage = 1;
+    sprite.reset();
+  };
+
+  var winOrLose = function () {
+    return win() || lose();
+  };
+
   return {
     setSecretWord: setSecretWord,
     getGaps: getGaps,
@@ -58,5 +69,7 @@ const createGame = function (sprite) {
     processKick: processKick,
     win: win,
     lose: lose,
+    restart: restart,
+    winOrLose: winOrLose,
   };
 };
