@@ -1,7 +1,20 @@
-const createGame = function () {
+const createGame = function (sprite) {
   let secretWord = "";
   let gaps = [];
   let stage = 1;
+
+  let processKick = function (kick) {
+    let exp = new RegExp(kick, "gi");
+    let result;
+    let isCorrect = false;
+
+    while ((result = exp.exec(secretWord))) {
+      gaps[result.index] = kick;
+      isCorrect = true;
+    }
+
+    if (!isCorrect) sprite.nextFrame();
+  };
 
   const createGaps = function () {
     gaps = Array(secretWord.length).fill("");
@@ -30,5 +43,6 @@ const createGame = function () {
     setSecretWord: setSecretWord,
     getGaps: getGaps,
     getStage: getStage,
+    processKick: processKick,
   };
 };

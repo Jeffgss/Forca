@@ -1,5 +1,5 @@
 const createSprite = function (selector) {
-  let element = document.querySelector(".sprite");
+  let element = document.querySelector(selector);
 
   let frames = [
     "frame1",
