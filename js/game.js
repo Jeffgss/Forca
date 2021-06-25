@@ -4,9 +4,7 @@ const createGame = function () {
   let stage = 1;
 
   const createGaps = function () {
-    for (let i = 0; i < secretWord.length; i++) {
-      gaps.push("");
-    }
+    gaps = Array(secretWord.length).fill("");
   };
 
   const nextStage = function () {
