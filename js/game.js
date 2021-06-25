@@ -39,10 +39,24 @@ const createGame = function (sprite) {
     return stage;
   };
 
+  const win = function () {
+    return gaps.length
+      ? !gaps.some(function (gap) {
+          return gap == "";
+        })
+      : false;
+  };
+
+  const lose = function () {
+    return sprite.isFinished();
+  };
+
   return {
     setSecretWord: setSecretWord,
     getGaps: getGaps,
     getStage: getStage,
     processKick: processKick,
+    win: win,
+    lose: lose,
   };
 };
