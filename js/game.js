@@ -58,7 +58,7 @@ const createGame = function (sprite) {
     sprite.reset();
   };
 
-  var winOrLose = function () {
+  const winOrLose = function () {
     return win() || lose();
   };
 
