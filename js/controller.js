@@ -23,11 +23,28 @@ const createController = function (game) {
     displaysGaps();
   };
 
+  const restart = function () {
+    game.restart();
+    gaps.innerHTML = "";
+    changePlaceHolder("Palavra secreta");
+  };
+
   const readKick = function () {
     let kick = input.value.trim().substr(0, 1);
     input.value = "";
     game.processKick(kick);
     displaysGaps();
+
+    setTimeout(function () {
+      if (game.winOrLose()) {
+        if (game.win()) {
+          alert("Parabéns, você ganhou!");
+        } else if (game.lose()) {
+          alert("Que pena, tente novamente!");
+        }
+        restart();
+      }
+    }, 200);
   };
 
   const start = function () {
