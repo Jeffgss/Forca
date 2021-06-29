@@ -1,7 +1,7 @@
-const createSprite = function (selector) {
-  let element = document.querySelector(selector);
+const createSprite = (selector) => {
+  const element = document.querySelector(selector);
 
-  let frames = [
+  const frames = [
     "frame1",
     "frame2",
     "frame3",
@@ -14,36 +14,31 @@ const createSprite = function (selector) {
   ];
 
   let current = 0;
-  let lastFrame = frames.length - 1;
+  const lastFrame = frames.length - 1;
 
   element.classList.add(frames[current]);
 
-  const moveFrame = function (from, to) {
+  const moveFrame = (from, to) => {
     element.classList.remove(from);
     element.classList.add(to);
   };
 
-  const hasNext = function () {
-    return current + 1 <= lastFrame;
-  };
+  const hasNext = () => current + 1 <= lastFrame;
 
-  const nextFrame = function () {
+  const nextFrame = () => {
     if (hasNext()) moveFrame(frames[current], frames[++current]);
   };
 
-  const reset = function () {
+  const reset = () => {
     moveFrame(frames[current], frames[0]);
     current = 0;
   };
 
-  const isFinished = function () {
-    if (hasNext()) return false;
-    return true;
-  };
+  const isFinished = () => !hasNext();
 
   return {
-    nextFrame: nextFrame,
-    reset: reset,
-    isFinished: isFinished,
+    nextFrame,
+    reset,
+    isFinished,
   };
 };
