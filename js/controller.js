@@ -1,10 +1,10 @@
-const createController = function (game) {
+const createController = (game) => {
   const input = document.querySelector(".entrada");
   const gaps = document.querySelector(".lacunas");
 
-  const displaysGaps = function () {
+  const displaysGaps = () => {
     gaps.innerHTML = "";
-    game.getGaps().forEach(function (gap) {
+    game.getGaps().forEach((gap) => {
       const gapsLi = document.createElement("li");
       gapsLi.classList.add("lacuna");
       gapsLi.textContent = gap;
@@ -12,11 +12,9 @@ const createController = function (game) {
     });
   };
 
-  const changePlaceHolder = function (text) {
-    input.placeholder = text;
-  };
+  const changePlaceHolder = (text) => (input.placeholder = text);
 
-  const saveSecretWord = function () {
+  const saveSecretWord = () => {
     try {
       game.setSecretWord(input.value.trim());
       input.value = "";
@@ -27,20 +25,19 @@ const createController = function (game) {
     }
   };
 
-  const restart = function () {
+  const restart = () => {
     game.restart();
     gaps.innerHTML = "";
     changePlaceHolder("Palavra secreta");
   };
 
-  const readKick = function () {
+  const readKick = () => {
     try {
-      let kick = input.value.trim().substr(0, 1);
+      game.processKick(input.value.trim().substr(0, 1));
       input.value = "";
-      game.processKick(kick);
       displaysGaps();
 
-      setTimeout(function () {
+      setTimeout(() => {
         if (game.winOrLose()) {
           if (game.win()) {
             alert("Parabéns, você ganhou!");
@@ -55,8 +52,8 @@ const createController = function (game) {
     }
   };
 
-  const start = function () {
-    document.addEventListener("keypress", function (event) {
+  const start = () => {
+    document.addEventListener("keypress", (event) => {
       if (event.key == "Enter") {
         switch (game.getStage()) {
           case 1:
@@ -69,5 +66,5 @@ const createController = function (game) {
       }
     });
   };
-  return { start: start };
+  return { start };
 };
