@@ -17,10 +17,14 @@ const createController = function (game) {
   };
 
   const saveSecretWord = function () {
-    game.setSecretWord(input.value.trim());
-    input.value = "";
-    changePlaceHolder("Chute");
-    displaysGaps();
+    try {
+      game.setSecretWord(input.value.trim());
+      input.value = "";
+      changePlaceHolder("Chute");
+      displaysGaps();
+    } catch (err) {
+      alert(err);
+    }
   };
 
   const restart = function () {
@@ -30,21 +34,25 @@ const createController = function (game) {
   };
 
   const readKick = function () {
-    let kick = input.value.trim().substr(0, 1);
-    input.value = "";
-    game.processKick(kick);
-    displaysGaps();
+    try {
+      let kick = input.value.trim().substr(0, 1);
+      input.value = "";
+      game.processKick(kick);
+      displaysGaps();
 
-    setTimeout(function () {
-      if (game.winOrLose()) {
-        if (game.win()) {
-          alert("Parabéns, você ganhou!");
-        } else if (game.lose()) {
-          alert("Que pena, tente novamente!");
+      setTimeout(function () {
+        if (game.winOrLose()) {
+          if (game.win()) {
+            alert("Parabéns, você ganhou!");
+          } else if (game.lose()) {
+            alert("Que pena, tente novamente!");
+          }
+          restart();
         }
-        restart();
-      }
-    }, 200);
+      }, 200);
+    } catch (err) {
+      alert(err);
+    }
   };
 
   const start = function () {

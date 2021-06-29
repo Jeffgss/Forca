@@ -4,6 +4,7 @@ const createGame = function (sprite) {
   let stage = 1;
 
   let processKick = function (kick) {
+    if (!kick.trim()) throw new Error("Chute inválido!");
     let exp = new RegExp(kick, "gi");
     let result;
     let isCorrect = false;
@@ -25,6 +26,8 @@ const createGame = function (sprite) {
   };
 
   const setSecretWord = function (word) {
+    if (!word.trim() || word.length <= 2)
+      throw new Error("Palavra secreta inválida!");
     secretWord = word;
 
     createGaps();
